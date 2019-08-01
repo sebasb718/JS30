@@ -8,13 +8,28 @@
 
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
+
+    let name = 'sebas';
+    let name2 = name;
+    console.log(name, name2);
+    name = 'sebastian';
+    console.log(name, name2);
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    const team = players;
+    console.log(players, team);
 
     // You might think we can just do something like this:
+    // team.push('sebas');
+    // console.log(players, team);
 
     // however what happens when we update that array?
 
@@ -25,12 +40,19 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
-
+    const team2 = players.slice();   //OPC1 CON ESTO SE COPIA EL ARRAY PLAYERS EN TEAM2
+    // console.log(players, team2);
+    // team2.push('sebas2');
+    // console.log(players, team2);
     // one way
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(players); //OPC2 CON ESTO SE COPIA EL ARRAY PLAYERS EN TEAM3
 
     // or use the new ES6 Spread
+    const team4 = [...players]; //OPC3 CON ESTO SE COPIA EL ARRAY PLAYERS EN TEAM3
+
+    const team5 = Array.from(players); //OPC4 CON ESTO SE COPIA EL ARRAY PLAYERS EN TEAM3
 
     // now when we update it, the original one isn't changed
 
@@ -43,12 +65,27 @@
     };
 
     // and think we make a copy:
+    //const captain = person;
+    //captain.number = 99;
 
     // how do we take a copy instead?
+    const cap2 = Object.assign({}, person, {number: 99}); //Con esto se copia un objeto
 
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const wes = {
+      name: 'wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+
+    const dev = Object.assign({}, wes); //esto no genera copia del social
+    const dev2 = JSON.parse(JSON.stringify(wes)); //Esto copia todo pero es codigo no recomendado. buscar funcion deepclone en internet
 
   </script>
 
